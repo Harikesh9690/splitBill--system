@@ -1,5 +1,4 @@
- 
-class Person {
+ class Person {
     constructor(name) {
       this.name = name;
       this.spent = 0;
@@ -7,6 +6,9 @@ class Person {
     }
   
     addExpense(amount, people) {
+      if (amount <= 0 || people.length === 0) {
+        throw new Error("Invalid input: amount must be positive and people array must not be empty.");
+      }
       const share = amount / people.length;
       this.spent += amount;
       people.forEach(person => {
@@ -27,6 +29,5 @@ class Person {
   D.addExpense(300, [A, B]);
   
   people.forEach(person => {
-    console.log(`${person.name} ${person.owed - person.spent <= 0 ? 'gets' : 'has to give'} ${Math.abs(person.owed - person.spent)}`);
+    console.log(`${person.name} ${person.owed - person.spent <= 0 ? 'gets' : 'has to give'} ${Math.abs(person.owed - person.spent).toFixed(2)}`);
   });
- 
